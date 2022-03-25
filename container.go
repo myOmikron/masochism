@@ -29,3 +29,14 @@ func Filter[T []E, E any](filter func(elem E) bool) func(iterable T) T {
 		return r
 	}
 }
+
+func Any[T []E, E any](f func(elem E) bool) func(iterable T) bool {
+	return func(iterable T) bool {
+		for i := 0; i < len(iterable); i++ {
+			if f(iterable[i]) {
+				return true
+			}
+		}
+		return false
+	}
+}

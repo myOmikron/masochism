@@ -53,3 +53,19 @@ func TestFilter(t *testing.T) {
 		t.Error("Wrong element in slice")
 	}
 }
+
+func TestAny(t *testing.T) {
+	s := []string{"abc", "def", "fgh"}
+
+	a := masochism.Any(func(t string) bool { return false })(s)
+
+	if a {
+		t.Error("Any should not be true")
+	}
+
+	a = masochism.Any(func(t string) bool { return "abc" == t })(s)
+
+	if !a {
+		t.Error("Any should be true")
+	}
+}
