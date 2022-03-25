@@ -1,7 +1,7 @@
 # Masochism for Go
 
 
-![https://files.omikron.dev/memes/functional_programming_for_masochists.png]
+![](https://files.omikron.dev/memes/functional_programming_for_masochists_little.png)
 
 * :zap: blazingly fast
 * :drop_of_blood: bleeding edge
