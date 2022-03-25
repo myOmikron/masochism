@@ -24,6 +24,23 @@ func TestForeach(t *testing.T) {
 	}
 }
 
+func TestMap(t *testing.T) {
+	a := []int{1, 2, 3, 4, 5}
+
+	b := masochism.Map(func(elem int) int { return elem * elem })(a)
+
+	if len(a) != len(b) {
+		t.Error("mismatch of slice len")
+	}
+
+	for i := 0; i < len(a); i++ {
+		if b[i] != a[i]*a[i] {
+			t.Error("function was not executed correctly")
+		}
+	}
+
+}
+
 func TestFilter(t *testing.T) {
 	s := []string{"abc", "def", "fgh"}
 	a := masochism.Filter(func(t string) bool { return strings.HasPrefix(t, "d") })(s)
