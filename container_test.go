@@ -54,6 +54,19 @@ func TestFilter(t *testing.T) {
 	}
 }
 
+func TestExclude(t *testing.T) {
+	s := []string{"abc", "def", "fgh"}
+	a := masochism.Exclude(func(t string) bool { return strings.HasPrefix(t, "d") })(s)
+
+	if len(a) != 2 {
+		t.Error("length mismatch")
+	}
+
+	if a[0] != "abc" || a[1] != "fgh" {
+		t.Error("Wrong element in slice")
+	}
+}
+
 func TestAny(t *testing.T) {
 	s := []string{"abc", "def", "fgh"}
 

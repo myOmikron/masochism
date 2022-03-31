@@ -18,11 +18,23 @@ func Map[T []E, E any](f func(elem E) E) func(iterable T) T {
 	}
 }
 
-func Filter[T []E, E any](filter func(elem E) bool) func(iterable T) T {
+func Filter[T []E, E any](f func(elem E) bool) func(iterable T) T {
 	return func(iterable T) T {
 		r := make([]E, 0)
 		for _, elem := range iterable {
-			if filter(elem) {
+			if f(elem) {
+				r = append(r, elem)
+			}
+		}
+		return r
+	}
+}
+
+func Exclude[T []E, E any](f func(elem E) bool) func(iterable T) T {
+	return func(iterable T) T {
+		r := make([]E, 0)
+		for _, elem := range iterable {
+			if !f(elem) {
 				r = append(r, elem)
 			}
 		}
