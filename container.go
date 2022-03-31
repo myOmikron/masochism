@@ -86,3 +86,13 @@ func CountMatch[T []E, E any](f func(elem E) bool) func(iterable T) int {
 		return count
 	}
 }
+
+func Reduce[T []E, E any](f func(first, second E) E) func(iterable T) E {
+	return func(iterable T) E {
+		var res E
+		for _, elem := range iterable {
+			res = f(res, elem)
+		}
+		return res
+	}
+}

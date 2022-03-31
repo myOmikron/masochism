@@ -118,3 +118,12 @@ func TestCountMatch(t *testing.T) {
 		t.Error("Element count is incorrect")
 	}
 }
+
+func TestReduce(t *testing.T) {
+	s := []int{1, 2, 3, 4, 5}
+
+	if res := masochism.Reduce(func(first, second int) int { return first + second })(s); res != 15 {
+		t.Error("Result of sum != 15")
+	}
+
+}
