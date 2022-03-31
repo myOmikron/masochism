@@ -41,7 +41,7 @@ func Any[T []E, E any](f func(elem E) bool) func(iterable T) bool {
 	}
 }
 
-func Every[T []E, E any](f func(elem E) bool) func(iterable T) bool {
+func All[T []E, E any](f func(elem E) bool) func(iterable T) bool {
 	return func(iterable T) bool {
 		for i := 0; i < len(iterable); i++ {
 			if !f(iterable[i]) {
@@ -60,5 +60,17 @@ func None[T []E, E any](f func(elem E) bool) func(iterable T) bool {
 			}
 		}
 		return true
+	}
+}
+
+func CountMatch[T []E, E any](f func(elem E) bool) func(iterable T) int {
+	return func(iterable T) int {
+		count := 0
+		for i := 0; i < len(iterable); i++ {
+			if f(iterable[i]) {
+				count++
+			}
+		}
+		return count
 	}
 }
