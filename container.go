@@ -40,3 +40,25 @@ func Any[T []E, E any](f func(elem E) bool) func(iterable T) bool {
 		return false
 	}
 }
+
+func Every[T []E, E any](f func(elem E) bool) func(iterable T) bool {
+	return func(iterable T) bool {
+		for i := 0; i < len(iterable); i++ {
+			if !f(iterable[i]) {
+				return false
+			}
+		}
+		return true
+	}
+}
+
+func None[T []E, E any](f func(elem E) bool) func(iterable T) bool {
+	return func(iterable T) bool {
+		for i := 0; i < len(iterable); i++ {
+			if f(iterable[i]) {
+				return false
+			}
+		}
+		return true
+	}
+}

@@ -69,3 +69,27 @@ func TestAny(t *testing.T) {
 		t.Error("Any should be true")
 	}
 }
+
+func TestEvery(t *testing.T) {
+	s := []string{"a", "abc", "abcdef"}
+
+	if !masochism.Every(func(t string) bool { return strings.HasPrefix(t, "a") })(s) {
+		t.Error("Elements should start with \"a\"")
+	}
+
+	if masochism.Every(func(t string) bool { return strings.HasSuffix(t, "f") })(s) {
+		t.Error("Elements does not end with \"f\"")
+	}
+}
+
+func TestNone(t *testing.T) {
+	s := []string{"a", "abc", "abcdef"}
+
+	if !masochism.None(func(t string) bool { return strings.HasPrefix(t, "b") })(s) {
+		t.Error("Elements does not start with \"b\"")
+	}
+
+	if masochism.None(func(t string) bool { return strings.HasSuffix(t, "f") })(s) {
+		t.Error("There is an element with suffix \"f\"")
+	}
+}
